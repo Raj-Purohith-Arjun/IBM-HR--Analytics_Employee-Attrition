@@ -1,41 +1,176 @@
-# IBM-employee-attrition
-Employee churn prediction.
 
-This project leverages the IBM HR Analytics Employee Attrition & Performance dataset to provide insights into the factors influencing employee attrition. By analyzing employee demographics, job satisfaction, work-life balance, and performance metrics, the goal is to identify the key contributors to attrition. This analysis helps organizations implement data-driven strategies to enhance retention, satisfaction, and overall performance.
+# 👩‍💼 IBM HR Analytics: Employee Attrition & Performance Analysis
 
-Objective
+**Author:** Raj Purohith Arjun  
+**Project Date:** July 2025
 
-The primary objective of this project is to analyze the factors influencing employee attrition by examining variables such as:
+---
 
-Demographics: Employee age, gender, job role, and department.
+## 📌 1. Project Overview
 
-Satisfaction Levels: Job satisfaction, environment satisfaction, and work-life balance.
+Employee attrition has a direct impact on productivity and cost. This project uses the IBM HR Analytics dataset to explore the **key drivers of attrition**, such as:
 
-Other Factors: Monthly income, distance from home, and performance ratings.
+- Demographics
+- Work-life balance
+- Job satisfaction
+- Compensation and performance
 
-Using statistical and machine learning techniques, the project aims to:
+The objective is to deliver **actionable insights** that support **data-driven retention strategies** and **workforce optimization**.
 
-Identify significant predictors of attrition.
+### 🎯 Research Questions
 
-Develop a model to estimate the probability of an employee leaving.
+- What factors most influence employee attrition?
+- How do salary and commute distance impact turnover?
+- Which roles or departments have higher attrition?
+- Can machine learning models accurately predict attrition?
+- How do performance and satisfaction relate to retention?
 
-Provide actionable recommendations for retention and organizational optimization.
+---
 
+## 📂 2. Dataset Description
 
-Research Questions
+- **Source:** Kaggle – IBM HR Analytics Employee Attrition & Performance  
+- **Rows:** 1,470 employees  
+- **Features:** 35 variables  
+- **Target:** `Attrition` (Yes = left, No = stayed)  
+- **Dropped Columns:** `EmployeeCount`, `StandardHours`, `EmployeeNumber` (non-informative)
 
+---
 
-What demographic and workplace characteristics are most strongly associated with employee attrition?
+## 🧹 3. Data Preparation & Encoding
 
-How do income and distance from home influence attrition probability?
+- **Ordinal Encoding:** Applied to features like JobSatisfaction & EnvironmentSatisfaction.
+  - Example: JobSatisfaction → Low=0, Medium=1, High=2
+- **One-Hot Encoding:** Applied to nominal features (e.g., Gender, Department).
+- **Scaling:** Standardized numerical features like MonthlyIncome and MonthlyRate.
 
-Can statistical or machine learning models accurately predict attrition?
+---
 
-Are some job roles or departments more prone to attrition?
+## 📊 4. Exploratory Data Analysis (EDA)
 
-How do performance ratings affect retention across different satisfaction levels?
+### 4.1 Univariate Insights
 
+- **Age:** Mean ~37; diverse workforce from 18–60
+- **Job/Environment Satisfaction:** Avg ~1.7/3 — scope for improvement
+- **Distance from Home:** Most <10 units; long commutes → attrition risk
+- **Income:** Right-skewed; retention tied to fair compensation
+- **Training:** Median = 3 sessions/year
+- **Attrition Rate:** ~16% — moderate concern
 
+📈 *Visuals included:* Histograms, boxplots, density plots
 
-Contact
-If you would like to explore the files or collaborate on this project, feel free to reach out on LinkedIn.
+---
+
+### 4.2 Bivariate Insights
+
+- **Correlations:**
+  - Age ↔ Total Working Years (0.68)
+  - Total Working Years ↔ Monthly Income (0.77)
+  - Distance from Home → linked with higher attrition
+- **Weak relationships:** Job Satisfaction & Work-Life Balance had low correlation with numeric variables
+- **Scatter/Pair Plots:**
+  - Younger, lower-paid, and long-commuting employees → higher attrition
+  - Longer tenure + higher income → lower attrition
+  - Job satisfaction clusters distinguish attrition status
+
+---
+
+### 4.3 Multivariate Analysis
+
+- **Heatmap:** Reinforced key correlation clusters
+- **PCA:** First two PCs explain 38.75% variance; partial cluster separation
+  - Suggests need for non-linear modeling for deeper insights
+
+---
+
+## 🤖 5. Regression and Classification Modeling
+
+### 5.1 Regression Models (Numeric Target)
+
+| Model                    | R²     | RMSE   | Conclusion                            |
+|--------------------------|--------|--------|----------------------------------------|
+| Simple Linear Regression | 0.022  | 0.3355 | Poor explanatory power                 |
+| Multiple Linear Reg.     | 0.0602 | 0.3288 | Slightly better, still weak            |
+| Polynomial Regression    | 0.0551 | 0.3575 | Inadequate for binary outcome          |
+
+*Attrition is binary → regression models not suitable.*
+
+---
+
+### 5.2 Logistic Regression (Classification)
+
+- **Accuracy:** 87.07%
+- **Precision:** 54.55%
+- **Recall:** 39.34%
+- **ROC-AUC:** 0.8065
+
+📌 *Insight:* Good discrimination, but recall low → churners missed.
+
+---
+
+## ⚙️ 6. Advanced Modeling & Regularization
+
+| Model            | R² / Metric   | Insight                                                   |
+|------------------|---------------|------------------------------------------------------------|
+| Ridge Regression | R² ≈ 1        | Great fit, but overfitting risk                           |
+| LASSO            | R² = 0.9278   | Strong performance + built-in feature selection           |
+| Elastic Net      | R² = 0.9691   | Best balance of accuracy and generalization               |
+| Cox Regression   | Concordance = 0.79 | Good predictor of attrition timing                  |
+| Quantile / Poisson / Hurdle Models | – | Useful for count and zero-inflated modeling           |
+| PLSR / PCR       | –             | Dimensionality reduction with latent factor insights       |
+
+---
+
+## ✅ 7. Model Evaluation Summary
+
+| Model                  | Accuracy / R² | RMSE   | Precision | Recall  | ROC-AUC |
+|------------------------|---------------|--------|-----------|---------|---------|
+| Simple Linear Reg      | 0.022         | 0.3355 | –         | –       | –       |
+| Multiple Linear Reg    | 0.0602        | 0.3288 | –         | –       | –       |
+| Polynomial Regression  | 0.0551        | 0.3575 | –         | –       | –       |
+| Logistic Regression    | 87.07%        | –      | 0.5455    | 0.3934  | 0.8065  |
+
+---
+
+## 📌 8. Recommendations & Business Actions
+
+### 🎯 Who to Target:
+- Younger employees (high risk group)
+- Low-income earners
+- Long-distance commuters
+
+### 🛠 How to Retain:
+- Improve job satisfaction and work-life balance
+- Offer role clarity and career advancement
+- Increase access to training & development
+- Explore hybrid/remote options for long-distance commuters
+
+### 🔍 Modeling Strategy:
+- Use classification models with class balancing
+- Apply regularization (LASSO, ElasticNet) to prevent overfitting
+- Include behavioral & qualitative data in future models
+
+---
+
+## 🧭 9. How to Use This Project
+
+- Preprocessed and encoded dataset ready for ML workflows  
+- Visual EDA and statistical findings  
+- Model performance summaries for both regression and classification  
+- Business interpretations at each modeling step  
+- Suitable for HR teams, data analysts, or organizational development leads
+
+---
+
+## 📚 10. References
+
+- IBM HR Analytics Dataset (Kaggle)  
+- DataCamp & Medium tutorials on attrition modeling  
+- Seaborn, Matplotlib for visualization  
+- Logistic regression & regularization papers in HR analytics
+
+---
+
+📄 **Full Report with Plots & Technical Details**  
+Read the Report pdf File
+
