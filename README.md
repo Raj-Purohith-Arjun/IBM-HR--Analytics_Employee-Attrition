@@ -1,8 +1,8 @@
 
-# 👩‍💼 IBM HR Analytics: Employee Attrition & Performance Analysis
+# IBM HR Analytics — Employee Attrition Modeling
 
 **Author:** Raj Purohith Arjun  
-**Project Date:** July 2025
+**Stack:** Python · SQL · Logistic Regression · ElasticNet · Statistical Analysis · Dashboarding
 
 ---
 
@@ -123,12 +123,26 @@ The objective is to deliver **actionable insights** that support **data-driven r
 
 ## ✅ 7. Model Evaluation Summary
 
-| Model                  | Accuracy / R² | RMSE   | Precision | Recall  | ROC-AUC |
-|------------------------|---------------|--------|-----------|---------|---------|
-| Simple Linear Reg      | 0.022         | 0.3355 | –         | –       | –       |
-| Multiple Linear Reg    | 0.0602        | 0.3288 | –         | –       | –       |
-| Polynomial Regression  | 0.0551        | 0.3575 | –         | –       | –       |
-| Logistic Regression    | 87.07%        | –      | 0.5455    | 0.3934  | 0.8065  |
+| Model                  | Accuracy | ROC-AUC | Notes |
+|------------------------|----------|---------|-------|
+| Logistic Regression    | 83.3%    | 0.754   | baseline |
+| ElasticNet (l1=0.5)    | 83.7%    | 0.754   | 29 features kept |
+
+---
+
+## 📊 Visualizations
+
+### Attrition by Category
+![Attrition by Category](attrition_by_category.png)
+
+### Executive Dashboard
+![Executive Dashboard](executive_dashboard.png)
+
+### Model Comparison — ROC Curves
+![Model Comparison](model_comparison.png)
+
+### Feature Importances (LR Coefficients)
+![LR Coefficients](lr_coefs.png)
 
 ---
 
@@ -171,6 +185,7 @@ The objective is to deliver **actionable insights** that support **data-driven r
 
 ---
 
-📄 **Full Report with Plots & Technical Details**  
-Read the Report pdf File
+📓 **Main Notebook:** [`IBM_HR_Attrition.ipynb`](IBM_HR_Attrition.ipynb) — fully runnable, no external data needed.
+
+📄 **Full Report:** See `Report2.pdf`
 
