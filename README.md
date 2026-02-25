@@ -130,6 +130,22 @@ The objective is to deliver **actionable insights** that support **data-driven r
 
 ---
 
+## 📊 Visualizations
+
+### Attrition by Category
+![Attrition by Category](attrition_by_category.png)
+
+### Executive Dashboard
+![Executive Dashboard](executive_dashboard.png)
+
+### Model Comparison — ROC Curves
+![Model Comparison](model_comparison.png)
+
+### Feature Importances (LR Coefficients)
+![LR Coefficients](lr_coefs.png)
+
+---
+
 ## 📌 8. Recommendations & Business Actions
 
 ### 🎯 Who to Target:
